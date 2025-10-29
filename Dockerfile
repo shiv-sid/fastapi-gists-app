@@ -1,20 +1,47 @@
-# Use official Python slim image
-FROM python:3.10-slim
+# ==========================
+# 1️⃣ Base Image (Build Stage)
+# ==========================
+FROM python:3.10-slim AS builder
 
-# Set working directory inside container
+# Set work directory
 WORKDIR /app
 
-# Copy dependencies first (for caching)
-COPY requirements.txt .
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential
 
-# Install dependencies
+# Copy dependency files first (leverage Docker cache)
+COPY requirements.txt .
+COPY requirements-dev.txt .
+
+# Install only prod dependencies here (dev handled separately in CI/CD)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the source code
-COPY . .
+# Copy app source
+COPY app ./app
 
-# Expose port
+# ==========================
+# 2️⃣ Final Image (Run Stage)
+# ==========================
+FROM python:3.10-slim
+
+# Create non-root user
+RUN useradd -m fastapiuser
+
+WORKDIR /app
+
+# Copy from builder stage
+COPY --from=builder /usr/local/lib/python3.10 /usr/local/lib/python3.10
+COPY --from=builder /app /app
+
+# Set environment variables
+ENV PORT=8080
+ENV PYTHONUNBUFFERED=1
+
+# Switch to non-root user
+USER fastapiuser
+
+# Expose FastAPI port
 EXPOSE 8080
 
-# Command to run the FastAPI app
+# Run FastAPI app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
