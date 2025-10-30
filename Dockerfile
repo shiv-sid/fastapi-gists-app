@@ -30,8 +30,10 @@ RUN useradd -m fastapiuser
 WORKDIR /app
 
 # Copy from builder stage
-COPY --from=builder /usr/local/lib/python3.10 /usr/local/lib/python3.10
+COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 COPY --from=builder /app /app
+
 
 # Set environment variables
 ENV PORT=8080
