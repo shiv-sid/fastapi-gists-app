@@ -1,0 +1,23 @@
+# grafana-values.yml
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - host: grafana.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+adminUser: admin
+adminPassword: admin
+
+persistence:
+  enabled: false
+
+resources:
+  requests:
+    memory: "128Mi"

@@ -1,0 +1,41 @@
+# Ignore virtual environments
+.venv/
+venv/
+env/
+
+# Python cache & artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Docker specific
+Dockerfile
+*.dockerfile
+
+# Git & CI/CD
+.git/
+.gitignore
+.github/
+
+# Editor/IDE related
+.vscode/
+.idea/
+
+# Test / coverage
+tests/
+.coverage
+htmlcov/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Packaging artifacts
+dist/
+build/
+*.egg-info/
+
+# Bytecode cache
+**/__pycache__/
