@@ -1,6 +1,7 @@
 # Kubernetes deployment — FastAPI Gists App
 
 ## Folder structure
+
 ```yaml
 k8s/
 │── deployment.yml   → FastAPI Deployment
@@ -11,13 +12,13 @@ k8s/
 ---
 
 ## Deploy
-
+```bash
 minikube start --driver=docker
 minikube addons enable ingress
 minikube tunnel   # keep running
 
 kubectl apply -f k8s/
-
+```
 ---
 
 ## Access API
@@ -27,8 +28,10 @@ http://fastapi.gists.local/octocat
 ---
 
 ## Enable GitOps (optional)
-
+```bash
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 kubectl apply -f k8s/argocd-app.yml
+```
+---
