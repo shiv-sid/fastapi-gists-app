@@ -33,14 +33,25 @@ GET /octocat?per_page=5&page=2
 
 ```yaml
 fastapi-gists-app/
+│── .github/workflows
+│ ├── ci-cd.yml            # cid-cd github actions instructions
 │── app/
-│ ├── __init__.py         # marks app as Python package
-│ └── main.py         # FastAPI application code
+│ ├── __init__.py          # marks app as Python package
+│ └── main.py              # FastAPI application code
 │── tests/
 │ ├── __init__.py
-│ └── test_gists.py   # pytest test cases
-│── requirements.txt
+│ └── test_gists.py        # pytest test cases
+│── k8s/
+│ ├── deployment.yml       # FastAPI Deployment
+│ ├── service.yml          # ClusterIP service
+│ ├── ingress.yml          # exposes app at http://fastapi.gists.local/<username>
+│ └── argocd-app.yml       # ArgoCD GitOps automation
+│── setup.py
+│── fastapi-gists-app.jpg  # architecture diagram
+│── requirements-dev.txt   # requirements file for build
+│── requirements.txt       # requirements file for PROD
 │── Dockerfile
+│── .dockerignore
 │── .gitignore
 │── README.md
 ```
