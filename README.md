@@ -61,9 +61,14 @@ fastapi-gists-app/
 
 ## Prerequisites
 
-- Python 3.7+
-- pip
-- Docker (optional, for containerized deployment)
+| Tool                  | Required Version |
+| --------------------- | ---------------- |
+| python                | 3.7+             |
+| pip                   | latest           |
+| Docker                | latest           |
+| kubectl               | latest           |
+| Minikube              | latest           |
+| ArgoCD CLI            | latest           |
 
 ---
 
