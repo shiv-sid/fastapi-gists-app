@@ -1,12 +1,13 @@
 # Kubernetes deployment — FastAPI Gists App
 
 ## Folder structure
+```yaml
 k8s/
 │── deployment.yml   → FastAPI Deployment
 │── service.yml      → ClusterIP service
 │── ingress.yml      → exposes app at http://fastapi.gists.local/<username>
 │── argocd-app.yml   → ArgoCD GitOps automation
-
+```
 ---
 
 ## Deploy
